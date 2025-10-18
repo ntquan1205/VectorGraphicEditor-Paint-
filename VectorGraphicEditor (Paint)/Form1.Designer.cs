@@ -83,6 +83,10 @@
             this.pic.Size = new System.Drawing.Size(884, 461);
             this.pic.TabIndex = 2;
             this.pic.TabStop = false;
+            this.pic.Click += new System.EventHandler(this.pic_Click);
+            this.pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic_MouseDown);
+            this.pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_MouseMove);
+            this.pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_MouseUp);
             // 
             // pic_color
             // 
@@ -139,6 +143,7 @@
             this.btn_pencil.Text = "Pencil";
             this.btn_pencil.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_pencil.UseVisualStyleBackColor = true;
+            this.btn_pencil.Click += new System.EventHandler(this.btn_pencil_Click);
             // 
             // btn_eraser
             // 
