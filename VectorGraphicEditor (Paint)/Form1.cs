@@ -29,6 +29,7 @@ namespace VectorGraphicEditor__Paint_
         bool paint = false;
         Point px, py;
         Pen p = new Pen(Color.Black, 1);
+        Pen erase = new Pen(Color.White, 10);
         int index;
 
         private void pic_Click(object sender, EventArgs e)
@@ -52,6 +53,12 @@ namespace VectorGraphicEditor__Paint_
                     g.DrawLine(p, px, py);
                     py = px;
                 }
+                if (index == 2)
+                {
+                    px = e.Location;
+                    g.DrawLine(erase, px, py);
+                    py = px;
+                }
             }
             pic.Refresh();
 
@@ -65,6 +72,11 @@ namespace VectorGraphicEditor__Paint_
         private void btn_pencil_Click(object sender, EventArgs e)
         {
             index = 1;
+        }
+
+        private void btn_eraser_Click(object sender, EventArgs e)
+        {
+            index = 2;
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)

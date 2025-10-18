@@ -159,6 +159,7 @@
             this.btn_eraser.Text = "Eraser";
             this.btn_eraser.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_eraser.UseVisualStyleBackColor = true;
+            this.btn_eraser.Click += new System.EventHandler(this.btn_eraser_Click);
             // 
             // btn_ellipse
             // 
