@@ -31,6 +31,7 @@ namespace VectorGraphicEditor__Paint_
         Pen p = new Pen(Color.Black, 1);
         Pen erase = new Pen(Color.White, 10);
         int index;
+        int x, y, sX, sY, cX, cY; 
 
         private void pic_Click(object sender, EventArgs e)
         {
@@ -41,6 +42,9 @@ namespace VectorGraphicEditor__Paint_
         {
             paint = true;
             py = e.Location;
+
+            cX = e.X;
+            cY = e.Y;
         }
 
         private void pic_MouseMove(object sender, MouseEventArgs e)
@@ -62,11 +66,31 @@ namespace VectorGraphicEditor__Paint_
             }
             pic.Refresh();
 
-        }
+            x = e.X;
+            y = e.Y;
+            sX = e.X - cX;
+            sY = e.Y - cY;
 
+        }
         private void pic_MouseUp(object sender, MouseEventArgs e)
         {
             paint = false;
+
+            sX = x - cX;
+            sY = y - cY;
+
+            if (index == 3) 
+            {
+                g.DrawEllipse(p, cX, cY, sX, sY);
+            }
+            if (index == 4) 
+            {
+                g.DrawRectangle(p, cX, cY, sX, sY);
+            }
+            if (index == 5)
+            {
+                g.DrawLine(p, cX, cY,x, y);
+            }
         }
 
         private void btn_pencil_Click(object sender, EventArgs e)
@@ -79,6 +103,20 @@ namespace VectorGraphicEditor__Paint_
             index = 2;
         }
 
+        private void btn_ellipse_Click(object sender, EventArgs e)
+        {
+            index = 3;
+        }
+
+        private void btn_rect_Click(object sender, EventArgs e)
+        {
+            index = 4;
+        }
+
+        private void btn_line_Click(object sender, EventArgs e)
+        {
+            index = 5;
+        }
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
