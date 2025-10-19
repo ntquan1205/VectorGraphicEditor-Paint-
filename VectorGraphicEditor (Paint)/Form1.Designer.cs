@@ -186,6 +186,7 @@
             this.btn_fill.Text = "Fill";
             this.btn_fill.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_fill.UseVisualStyleBackColor = true;
+            this.btn_fill.Click += new System.EventHandler(this.btn_fill_Click);
             // 
             // btn_color
             // 
@@ -242,6 +243,7 @@
             this.pic.TabStop = false;
             this.pic.Click += new System.EventHandler(this.pic_Click);
             this.pic.Paint += new System.Windows.Forms.PaintEventHandler(this.pic_Paint);
+            this.pic.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pic_MouseClick);
             this.pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic_MouseDown);
             this.pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_MouseMove);
             this.pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_MouseUp);
