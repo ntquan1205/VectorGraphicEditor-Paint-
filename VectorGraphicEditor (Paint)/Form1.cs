@@ -36,6 +36,8 @@ namespace VectorGraphicEditor__Paint_
         ColorDialog cd = new ColorDialog();
         Color new_color;
 
+        private List<Shape> shapes = new List<Shape>();
+
         private void pic_Click(object sender, EventArgs e)
         {
 
@@ -84,14 +86,17 @@ namespace VectorGraphicEditor__Paint_
             if (index == 3) 
             {
                 g.DrawEllipse(p, cX, cY, sX, sY);
+                shapes.Add(new EllipseShape(new Rectangle(cX, cY, sX, sY), p.Color, p.Width));
             }
             if (index == 4) 
             {
                 g.DrawRectangle(p, cX, cY, sX, sY);
+                shapes.Add(new RectangleShape(new Rectangle(cX, cY, sX, sY), p.Color, p.Width));
             }
             if (index == 5)
             {
                 g.DrawLine(p, cX, cY,x, y);
+                shapes.Add(new Line(new Point(cX, cY), new Point(x, y), p.Color, p.Width));
             }
         }
         private void btn_pencil_Click(object sender, EventArgs e)
@@ -121,7 +126,12 @@ namespace VectorGraphicEditor__Paint_
         {
             Graphics g = e.Graphics;
 
-            if(paint)
+            foreach (var shape in shapes)
+            {
+                shape.Draw(g);
+            }
+
+            if (paint)
             {
                 if (index == 3)
                 {
@@ -136,7 +146,6 @@ namespace VectorGraphicEditor__Paint_
                     g.DrawLine(p, cX, cY, x, y);
                 }
             }
-
         }
         private void btn_save_Click(object sender, EventArgs e)
         {
@@ -148,6 +157,7 @@ namespace VectorGraphicEditor__Paint_
             g.Clear(Color.White);
             pic.Image = bm;
             index = 0;
+            shapes.Clear();
         }
 
         private void btn_color_Click(object sender, EventArgs e)
