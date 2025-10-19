@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.XPath;
 
 namespace VectorGraphicEditor__Paint_
 {
@@ -16,7 +17,7 @@ namespace VectorGraphicEditor__Paint_
         {
             InitializeComponent();
 
-            this.Width = 900;
+            this.Width = 1000;
             this.Height = 600;
             bm = new Bitmap(pic.Width, pic.Height);
             g = Graphics.FromImage(bm);
@@ -31,13 +32,14 @@ namespace VectorGraphicEditor__Paint_
         Pen p = new Pen(Color.Black, 1);
         Pen erase = new Pen(Color.White, 10);
         int index;
-        int x, y, sX, sY, cX, cY; 
+        int x, y, sX, sY, cX, cY;
+        ColorDialog cd = new ColorDialog();
+        Color new_color;
 
         private void pic_Click(object sender, EventArgs e)
         {
 
         }
-
         private void pic_MouseDown(object sender, MouseEventArgs e)
         {
             paint = true;
@@ -92,7 +94,6 @@ namespace VectorGraphicEditor__Paint_
                 g.DrawLine(p, cX, cY,x, y);
             }
         }
-
         private void btn_pencil_Click(object sender, EventArgs e)
         {
             index = 1;
@@ -107,7 +108,6 @@ namespace VectorGraphicEditor__Paint_
         {
             index = 3;
         }
-
         private void btn_rect_Click(object sender, EventArgs e)
         {
             index = 4;
@@ -117,8 +117,65 @@ namespace VectorGraphicEditor__Paint_
         {
             index = 5;
         }
+        private void pic_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+
+            if(paint)
+            {
+                if (index == 3)
+                {
+                    g.DrawEllipse(p, cX, cY, sX, sY);
+                }
+                if (index == 4)
+                {
+                    g.DrawRectangle(p, cX, cY, sX, sY);
+                }
+                if (index == 5)
+                {
+                    g.DrawLine(p, cX, cY, x, y);
+                }
+            }
+
+        }
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+         
+        }
+
+        private void btn_clear_Click(object sender, EventArgs e)
+        {
+            g.Clear(Color.White);
+            pic.Image = bm;
+            index = 0;
+        }
+
+        private void btn_color_Click(object sender, EventArgs e)
+        {
+            cd.ShowDialog();
+            new_color = cd.Color;
+            pic_color.BackColor = cd.Color;
+            p.Color = cd.Color;
+
+        }
+
+        static Point set_point(PictureBox pb, Point pt) 
+        {
+            float pX = 1f * pb.Image.Width / pb.Width;  
+            float pY = 1f * pb.Image.Height / pb.Height;  
+            return new Point((int)(pt.X * pX), (int)(pt.Y * pY));
+        }
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
+
+        }
+
+        private void color_picker_MouseClick(object sender, MouseEventArgs e)
+        {
+            Point point = set_point(color_picker, e.Location);
+            pic_color.BackColor = ((Bitmap)color_picker.Image).GetPixel(point.X,point.Y);
+            new_color = pic_color.BackColor;
+            p.Color = pic_color.BackColor;
 
         }
     }
