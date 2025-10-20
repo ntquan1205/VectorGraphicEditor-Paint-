@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_save = new System.Windows.Forms.Button();
+            this.btn_clear = new System.Windows.Forms.Button();
             this.color_picker = new System.Windows.Forms.PictureBox();
             this.btn_line = new System.Windows.Forms.Button();
             this.btn_rect = new System.Windows.Forms.Button();
@@ -41,8 +43,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pic = new System.Windows.Forms.PictureBox();
-            this.btn_clear = new System.Windows.Forms.Button();
-            this.btn_save = new System.Windows.Forms.Button();
+            this.btn_select = new System.Windows.Forms.Button();
+            this.btn_delete = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.color_picker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
@@ -51,6 +53,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel1.Controls.Add(this.btn_delete);
+            this.panel1.Controls.Add(this.btn_select);
             this.panel1.Controls.Add(this.btn_save);
             this.panel1.Controls.Add(this.btn_clear);
             this.panel1.Controls.Add(this.color_picker);
@@ -66,8 +70,38 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1012, 100);
+            this.panel1.Size = new System.Drawing.Size(1103, 100);
             this.panel1.TabIndex = 0;
+            // 
+            // btn_save
+            // 
+            this.btn_save.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
+            this.btn_save.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_save.ForeColor = System.Drawing.Color.White;
+            this.btn_save.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_save.Location = new System.Drawing.Point(878, 17);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(91, 29);
+            this.btn_save.TabIndex = 5;
+            this.btn_save.Text = "Save";
+            this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            // 
+            // btn_clear
+            // 
+            this.btn_clear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
+            this.btn_clear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btn_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_clear.ForeColor = System.Drawing.Color.White;
+            this.btn_clear.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_clear.Location = new System.Drawing.Point(878, 56);
+            this.btn_clear.Name = "btn_clear";
+            this.btn_clear.Size = new System.Drawing.Size(91, 29);
+            this.btn_clear.TabIndex = 4;
+            this.btn_clear.Text = "Clear";
+            this.btn_clear.UseVisualStyleBackColor = true;
+            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
             // color_picker
             // 
@@ -229,7 +263,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 423);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1012, 38);
+            this.panel2.Size = new System.Drawing.Size(1103, 38);
             this.panel2.TabIndex = 1;
             // 
             // pic
@@ -238,7 +272,7 @@
             this.pic.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pic.Location = new System.Drawing.Point(0, 0);
             this.pic.Name = "pic";
-            this.pic.Size = new System.Drawing.Size(1012, 461);
+            this.pic.Size = new System.Drawing.Size(1103, 461);
             this.pic.TabIndex = 2;
             this.pic.TabStop = false;
             this.pic.Click += new System.EventHandler(this.pic_Click);
@@ -248,41 +282,41 @@
             this.pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_MouseMove);
             this.pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_MouseUp);
             // 
-            // btn_clear
+            // btn_select
             // 
-            this.btn_clear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
-            this.btn_clear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btn_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_clear.ForeColor = System.Drawing.Color.White;
-            this.btn_clear.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_clear.Location = new System.Drawing.Point(878, 56);
-            this.btn_clear.Name = "btn_clear";
-            this.btn_clear.Size = new System.Drawing.Size(91, 29);
-            this.btn_clear.TabIndex = 4;
-            this.btn_clear.Text = "Clear";
-            this.btn_clear.UseVisualStyleBackColor = true;
-            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
+            this.btn_select.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
+            this.btn_select.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btn_select.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_select.ForeColor = System.Drawing.Color.White;
+            this.btn_select.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_select.Location = new System.Drawing.Point(986, 56);
+            this.btn_select.Name = "btn_select";
+            this.btn_select.Size = new System.Drawing.Size(91, 29);
+            this.btn_select.TabIndex = 5;
+            this.btn_select.Text = "Select";
+            this.btn_select.UseVisualStyleBackColor = true;
+            this.btn_select.Click += new System.EventHandler(this.btn_select_Click);
             // 
-            // btn_save
+            // btn_delete
             // 
-            this.btn_save.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
-            this.btn_save.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_save.ForeColor = System.Drawing.Color.White;
-            this.btn_save.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_save.Location = new System.Drawing.Point(878, 17);
-            this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(91, 29);
-            this.btn_save.TabIndex = 5;
-            this.btn_save.Text = "Save";
-            this.btn_save.UseVisualStyleBackColor = true;
-            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            this.btn_delete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
+            this.btn_delete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_delete.ForeColor = System.Drawing.Color.White;
+            this.btn_delete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_delete.Location = new System.Drawing.Point(986, 17);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(91, 29);
+            this.btn_delete.TabIndex = 6;
+            this.btn_delete.Text = "Delete";
+            this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1012, 461);
+            this.ClientSize = new System.Drawing.Size(1103, 461);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pic);
@@ -314,6 +348,8 @@
         private System.Windows.Forms.PictureBox color_picker;
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.Button btn_clear;
+        private System.Windows.Forms.Button btn_select;
+        private System.Windows.Forms.Button btn_delete;
     }
 }
 

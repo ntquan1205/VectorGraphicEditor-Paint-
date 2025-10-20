@@ -17,12 +17,15 @@ namespace VectorGraphicEditor__Paint_
         {
             InitializeComponent();
 
-            this.Width = 1000;
+            this.Width = 1200;
             this.Height = 600;
             bm = new Bitmap(pic.Width, pic.Height);
             g = Graphics.FromImage(bm);
             g.Clear(Color.White);
             pic.Image = bm;
+
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(Form1_KeyDown);
         }
 
         Bitmap bm;
@@ -38,6 +41,10 @@ namespace VectorGraphicEditor__Paint_
 
         private List<Shape> shapes = new List<Shape>();
 
+        private Shape selectedShape = null;
+        private bool isMoving = false;
+        private Point previousMousePosition;
+
         private void pic_Click(object sender, EventArgs e)
         {
 
@@ -49,6 +56,16 @@ namespace VectorGraphicEditor__Paint_
 
             cX = e.X;
             cY = e.Y;
+
+            if (index == 0) 
+            {
+                SelectShape(e.Location);
+                if (selectedShape != null)
+                {
+                    isMoving = true;
+                    previousMousePosition = e.Location;
+                }
+            }
         }
 
         private void pic_MouseMove(object sender, MouseEventArgs e)
@@ -68,6 +85,17 @@ namespace VectorGraphicEditor__Paint_
                     py = px;
                 }
             }
+
+            if (isMoving && selectedShape != null)
+            {
+                int deltaX = e.X - previousMousePosition.X;
+                int deltaY = e.Y - previousMousePosition.Y;
+
+                selectedShape.Move(deltaX, deltaY);
+                previousMousePosition = e.Location;
+
+                RedrawCanvas();
+            }
             pic.Refresh();
 
             x = e.X;
@@ -79,6 +107,7 @@ namespace VectorGraphicEditor__Paint_
         private void pic_MouseUp(object sender, MouseEventArgs e)
         {
             paint = false;
+            isMoving = false;
 
             sX = x - cX;
             sY = y - cY;
@@ -99,28 +128,101 @@ namespace VectorGraphicEditor__Paint_
                 shapes.Add(new Line(new Point(cX, cY), new Point(x, y), p.Color, p.Width));
             }
         }
+
+        // двойного клика для отмены перемещения
+        private void pic_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (index == 0 && isMoving)
+            {
+                isMoving = false;
+
+                System.Media.SystemSounds.Beep.Play();
+
+                RedrawCanvas();
+            }
+        }
+
+        private void SelectShape(Point location)
+        {
+            foreach (var shape in shapes)
+            {
+                shape.IsSelected = false;
+            }
+
+            selectedShape = null;
+            for (int i = shapes.Count - 1; i >= 0; i--)
+            {
+                if (shapes[i].Contains(location))
+                {
+                    shapes[i].IsSelected = true;
+                    selectedShape = shapes[i];
+                    break;
+                }
+            }
+
+            pic.Refresh();
+        }
+
+        private void DeleteSelectedShape()
+        {
+            if (selectedShape != null)
+            {
+                shapes.Remove(selectedShape);
+                selectedShape = null;
+                RedrawCanvas();
+            }
+        }
+
+        private void RedrawCanvas()
+        {
+            g.Clear(Color.White);
+            foreach (var shape in shapes)
+            {
+                shape.Draw(g);
+            }
+            pic.Image = bm;
+            pic.Refresh();
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                DeleteSelectedShape();
+            }
+        }
         private void btn_pencil_Click(object sender, EventArgs e)
         {
             index = 1;
+            selectedShape = null;
+            isMoving = false;
         }
 
         private void btn_eraser_Click(object sender, EventArgs e)
         {
             index = 2;
+            selectedShape = null;
+            isMoving = false;
         }
 
         private void btn_ellipse_Click(object sender, EventArgs e)
         {
             index = 3;
+            selectedShape = null;
+            isMoving = false;
         }
         private void btn_rect_Click(object sender, EventArgs e)
         {
             index = 4;
+            selectedShape = null;
+            isMoving = false;
         }
 
         private void btn_line_Click(object sender, EventArgs e)
         {
             index = 5;
+            selectedShape = null;
+            isMoving = false;
         }
         private void pic_Paint(object sender, PaintEventArgs e)
         {
@@ -158,6 +260,7 @@ namespace VectorGraphicEditor__Paint_
             pic.Image = bm;
             index = 0;
             shapes.Clear();
+            isMoving = false;
         }
 
         private void btn_color_Click(object sender, EventArgs e)
@@ -175,6 +278,19 @@ namespace VectorGraphicEditor__Paint_
             float pY = 1f * pb.Image.Height / pb.Height;  
             return new Point((int)(pt.X * pX), (int)(pt.Y * pY));
         }
+
+        private void btn_select_Click(object sender, EventArgs e)
+        {
+            index = 0;
+            isMoving = false;
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            DeleteSelectedShape();
+            isMoving = false;
+        }
+
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
@@ -228,11 +344,18 @@ namespace VectorGraphicEditor__Paint_
                 Fill(bm, point.X, point.Y, new_color); 
             }
 
+            else if (index == 0) 
+            {
+                SelectShape(e.Location);
+            }
+
         }
 
         private void btn_fill_Click(object sender, EventArgs e)
         {
             index = 6;
+            selectedShape = null;
+            isMoving = false;
         }
 
 

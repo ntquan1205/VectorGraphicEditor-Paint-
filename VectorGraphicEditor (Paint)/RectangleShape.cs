@@ -20,5 +20,24 @@ namespace VectorGraphicEditor__Paint_
                 g.DrawRectangle(pen, Bounds);
             }
         }
+
+        public override bool Contains(Point point)
+        {
+            Rectangle expandedBounds = new Rectangle(
+                Bounds.X - 5,
+                Bounds.Y - 5,
+                Bounds.Width + 10,
+                Bounds.Height + 10);
+            return expandedBounds.Contains(point);
+        }
+
+        public override void Move(int deltaX, int deltaY)
+        {
+            Bounds = new Rectangle(
+                Bounds.X + deltaX,
+                Bounds.Y + deltaY,
+                Bounds.Width,
+                Bounds.Height);
+        }
     }
 }

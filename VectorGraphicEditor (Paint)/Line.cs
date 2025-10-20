@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace VectorGraphicEditor__Paint_
 {
@@ -20,6 +21,51 @@ namespace VectorGraphicEditor__Paint_
             {
                 g.DrawLine(pen, StartPoint, EndPoint);
             }
+        }
+
+        public override bool Contains(Point point)
+        {
+            return DistanceToLine(point, StartPoint, EndPoint) < 10;
+        }
+
+        public override void Move(int deltaX, int deltaY)
+        {
+            StartPoint = new Point(StartPoint.X + deltaX, StartPoint.Y + deltaY);
+            EndPoint = new Point(EndPoint.X + deltaX, EndPoint.Y + deltaY);
+        }
+
+        private float DistanceToLine(Point point, Point lineStart, Point lineEnd)
+        {
+            float A = point.X - lineStart.X;
+            float B = point.Y - lineStart.Y;
+            float C = lineEnd.X - lineStart.X;
+            float D = lineEnd.Y - lineStart.Y;
+
+            float dot = A * C + B * D;
+            float len_sq = C * C + D * D;
+            float param = dot / len_sq;
+
+            float xx, yy;
+
+            if (param < 0)
+            {
+                xx = lineStart.X;
+                yy = lineStart.Y;
+            }
+            else if (param > 1)
+            {
+                xx = lineEnd.X;
+                yy = lineEnd.Y;
+            }
+            else
+            {
+                xx = lineStart.X + param * C;
+                yy = lineStart.Y + param * D;
+            }
+
+            float dx = point.X - xx;
+            float dy = point.Y - yy;
+            return (float)Math.Sqrt(dx * dx + dy * dy);
         }
     }
 }
