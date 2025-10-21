@@ -46,6 +46,8 @@ namespace VectorGraphicEditor__Paint_
         private Point previousMousePosition;
 
         private PencilDrawing currentPencilDrawing = null;
+        private EraserDrawing currentEraserDrawing = null;
+
 
         private void pic_Click(object sender, EventArgs e)
         {
@@ -59,7 +61,7 @@ namespace VectorGraphicEditor__Paint_
             cX = e.X;
             cY = e.Y;
 
-            if (index == 0) 
+            if (index == 0)
             {
                 SelectShape(e.Location);
                 if (selectedShape != null)
@@ -68,11 +70,17 @@ namespace VectorGraphicEditor__Paint_
                     previousMousePosition = e.Location;
                 }
             }
-            if (index == 1) // Карандаш
+            if (index == 1)
             {
                 currentPencilDrawing = new PencilDrawing(p.Color, p.Width);
                 currentPencilDrawing.AddPoint(e.Location);
                 shapes.Add(currentPencilDrawing);
+            }
+            if (index == 2)
+            {
+                currentEraserDrawing = new EraserDrawing(erase.Width);
+                currentEraserDrawing.AddPoint(e.Location);
+                shapes.Add(currentEraserDrawing);
             }
         }
 
@@ -87,10 +95,11 @@ namespace VectorGraphicEditor__Paint_
                     currentPencilDrawing.AddPoint(e.Location);
                     py = px;
                 }
-                if (index == 2)
+                if (index == 2 && currentEraserDrawing != null) 
                 {
                     px = e.Location;
                     g.DrawLine(erase, px, py);
+                    currentEraserDrawing.AddPoint(e.Location);
                     py = px;
                 }
             }
@@ -182,11 +191,15 @@ namespace VectorGraphicEditor__Paint_
 
         private void RedrawCanvas()
         {
+            bm = new Bitmap(pic.Width, pic.Height);
+            g = Graphics.FromImage(bm);
             g.Clear(Color.White);
+
             foreach (var shape in shapes)
             {
                 shape.Draw(g);
             }
+
             pic.Image = bm;
             pic.Refresh();
         }

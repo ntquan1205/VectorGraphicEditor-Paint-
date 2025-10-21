@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EllipseShape.cs" />
+    <Compile Include="EraserDrawing.cs" />
     <Compile Include="FillArea.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="PencilDrawing.cs" />
