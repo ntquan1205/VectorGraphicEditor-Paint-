@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EllipseShape.cs" />
+    <Compile Include="FillArea.cs" />
     <Compile Include="Line.cs" />
+    <Compile Include="PencilDrawing.cs" />
     <Compile Include="RectangleShape.cs" />
     <Compile Include="Shape.cs" />
     <Compile Include="Form1.cs">

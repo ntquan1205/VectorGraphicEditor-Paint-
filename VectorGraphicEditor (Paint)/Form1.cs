@@ -45,6 +45,8 @@ namespace VectorGraphicEditor__Paint_
         private bool isMoving = false;
         private Point previousMousePosition;
 
+        private PencilDrawing currentPencilDrawing = null;
+
         private void pic_Click(object sender, EventArgs e)
         {
 
@@ -66,6 +68,12 @@ namespace VectorGraphicEditor__Paint_
                     previousMousePosition = e.Location;
                 }
             }
+            if (index == 1) // Карандаш
+            {
+                currentPencilDrawing = new PencilDrawing(p.Color, p.Width);
+                currentPencilDrawing.AddPoint(e.Location);
+                shapes.Add(currentPencilDrawing);
+            }
         }
 
         private void pic_MouseMove(object sender, MouseEventArgs e)
@@ -76,6 +84,7 @@ namespace VectorGraphicEditor__Paint_
                 {
                     px = e.Location;
                     g.DrawLine(p, px, py);
+                    currentPencilDrawing.AddPoint(e.Location);
                     py = px;
                 }
                 if (index == 2)
@@ -128,8 +137,6 @@ namespace VectorGraphicEditor__Paint_
                 shapes.Add(new Line(new Point(cX, cY), new Point(x, y), p.Color, p.Width));
             }
         }
-
-        // двойного клика для отмены перемещения
         private void pic_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (index == 0 && isMoving)
@@ -341,7 +348,16 @@ namespace VectorGraphicEditor__Paint_
             if (index == 6)
             {
                 Point point = set_point(pic, e.Location);
-                Fill(bm, point.X, point.Y, new_color); 
+
+                Bitmap filledBitmap = new Bitmap(bm);
+                Fill(filledBitmap, point.X, point.Y, new_color);
+
+                shapes.Add(new FillArea(point, new_color, filledBitmap));
+
+                bm = new Bitmap(filledBitmap);
+                g = Graphics.FromImage(bm);
+
+                RedrawCanvas();
             }
 
             else if (index == 0) 
