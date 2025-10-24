@@ -31,6 +31,8 @@ namespace VectorGraphicEditor__Paint_
                     g.DrawLine(pen, Points[i - 1], Points[i]);
                 }
             }
+
+            DrawSelection(g);
         }
 
         public override bool Contains(Point point)

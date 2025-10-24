@@ -20,6 +20,8 @@ namespace VectorGraphicEditor__Paint_
             {
                 g.DrawRectangle(pen, Bounds.X, Bounds.Y, Bounds.Width, Bounds.Height);
             }
+
+            DrawSelection(g);
         }
 
         public override bool Contains(Point point)

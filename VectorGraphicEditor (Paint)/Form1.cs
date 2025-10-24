@@ -150,7 +150,7 @@ namespace VectorGraphicEditor__Paint_
                 }
             }
 
-            pic.Refresh();
+            RedrawCanvas(); 
         }
 
         private void DeleteSelectedShape()
@@ -236,15 +236,15 @@ namespace VectorGraphicEditor__Paint_
             {
                 using (Pen previewPen = new Pen(p.Color, p.Width))
                 {
-                    if (index == 3) // Ellipse preview
+                    if (index == 3) 
                     {
                         g.DrawEllipse(previewPen, cX, cY, sX, sY);
                     }
-                    else if (index == 4) // Rectangle preview
+                    else if (index == 4)
                     {
                         g.DrawRectangle(previewPen, cX, cY, sX, sY);
                     }
-                    else if (index == 5) // Line preview
+                    else if (index == 5) 
                     {
                         g.DrawLine(previewPen, cX, cY, x, y);
                     }

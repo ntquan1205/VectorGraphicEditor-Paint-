@@ -20,6 +20,7 @@ namespace VectorGraphicEditor__Paint_
             {
                 g.DrawEllipse(pen, Bounds);
             }
+            DrawSelection(g);
         }
 
         public override bool Contains(Point point)

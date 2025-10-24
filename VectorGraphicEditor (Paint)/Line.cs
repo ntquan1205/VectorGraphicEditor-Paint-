@@ -23,6 +23,8 @@ namespace VectorGraphicEditor__Paint_
             {
                 g.DrawLine(pen, StartPoint, EndPoint);
             }
+
+            DrawSelection(g);
         }
 
         public override bool Contains(Point point)

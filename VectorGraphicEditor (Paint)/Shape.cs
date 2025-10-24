@@ -13,14 +13,16 @@ namespace VectorGraphicEditor__Paint_
         public abstract void Move(int deltaX, int deltaY);
         public abstract GraphicsPath GetPath();
 
-        protected virtual void DrawSelection(Graphics g)
+        protected void DrawSelection(Graphics g)
         {
             if (IsSelected)
             {
-                using (var pen = new Pen(Color.Blue, 1) { DashStyle = DashStyle.Dash })
+                using (Pen selectionPen = new Pen(Color.Blue, 1))
                 {
+                    selectionPen.DashStyle = DashStyle.Dash;
+                    selectionPen.DashPattern = new float[] { 3, 3 };
                     var path = GetPath();
-                    g.DrawPath(pen, path);
+                    g.DrawPath(selectionPen, path);
                 }
             }
         }
