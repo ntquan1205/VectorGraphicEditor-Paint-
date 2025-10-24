@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace VectorGraphicEditor__Paint_
 {
@@ -38,6 +39,13 @@ namespace VectorGraphicEditor__Paint_
                 Bounds.Y + deltaY,
                 Bounds.Width,
                 Bounds.Height);
+        }
+
+        public override GraphicsPath GetPath()
+        {
+            var path = new GraphicsPath();
+            path.AddEllipse(Bounds);
+            return path;
         }
     }
 }

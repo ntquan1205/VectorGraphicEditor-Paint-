@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace VectorGraphicEditor__Paint_
 {
@@ -34,7 +35,6 @@ namespace VectorGraphicEditor__Paint_
 
         public override bool Contains(Point point)
         {
-            // Для карандаша проверяем близость к любой из линий
             for (int i = 1; i < Points.Count; i++)
             {
                 if (DistanceToLine(point, Points[i - 1], Points[i]) < 10)
@@ -51,6 +51,16 @@ namespace VectorGraphicEditor__Paint_
             }
         }
 
+        public override GraphicsPath GetPath()
+        {
+            var path = new GraphicsPath();
+            if (Points.Count > 1)
+            {
+                path.AddLines(Points.ToArray());
+            }
+            return path;
+        }
+
         private float DistanceToLine(Point point, Point lineStart, Point lineEnd)
         {
             float A = point.X - lineStart.X;
@@ -60,7 +70,7 @@ namespace VectorGraphicEditor__Paint_
 
             float dot = A * C + B * D;
             float len_sq = C * C + D * D;
-            float param = dot / len_sq;
+            float param = (len_sq != 0) ? dot / len_sq : -1;
 
             float xx, yy;
 

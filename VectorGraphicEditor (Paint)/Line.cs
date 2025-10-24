@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace VectorGraphicEditor__Paint_
 {
@@ -15,6 +16,7 @@ namespace VectorGraphicEditor__Paint_
             Color = color;
             PenWidth = width;
         }
+
         public override void Draw(Graphics g)
         {
             using (Pen pen = new Pen(Color, PenWidth))
@@ -34,6 +36,13 @@ namespace VectorGraphicEditor__Paint_
             EndPoint = new Point(EndPoint.X + deltaX, EndPoint.Y + deltaY);
         }
 
+        public override GraphicsPath GetPath()
+        {
+            var path = new GraphicsPath();
+            path.AddLine(StartPoint, EndPoint);
+            return path;
+        }
+
         private float DistanceToLine(Point point, Point lineStart, Point lineEnd)
         {
             float A = point.X - lineStart.X;
@@ -43,7 +52,7 @@ namespace VectorGraphicEditor__Paint_
 
             float dot = A * C + B * D;
             float len_sq = C * C + D * D;
-            float param = dot / len_sq;
+            float param = (len_sq != 0) ? dot / len_sq : -1;
 
             float xx, yy;
 

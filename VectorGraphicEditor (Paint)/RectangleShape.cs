@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace VectorGraphicEditor__Paint_
 {
@@ -17,7 +18,7 @@ namespace VectorGraphicEditor__Paint_
         {
             using (Pen pen = new Pen(Color, PenWidth))
             {
-                g.DrawRectangle(pen, Bounds);
+                g.DrawRectangle(pen, Bounds.X, Bounds.Y, Bounds.Width, Bounds.Height);
             }
         }
 
@@ -38,6 +39,13 @@ namespace VectorGraphicEditor__Paint_
                 Bounds.Y + deltaY,
                 Bounds.Width,
                 Bounds.Height);
+        }
+
+        public override GraphicsPath GetPath()
+        {
+            var path = new GraphicsPath();
+            path.AddRectangle(Bounds);
+            return path;
         }
     }
 }
