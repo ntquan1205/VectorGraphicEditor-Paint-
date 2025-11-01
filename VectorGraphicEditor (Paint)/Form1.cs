@@ -1,17 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace VectorGraphicEditor__Paint_
 {
     public partial class Form1 : Form
     {
+        private FileIOService _fileService;
+        private readonly string _autoSaveFilePath;
         public Form1()
         {
             InitializeComponent();
 
-            this.Width = 1000;
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string appFolder = Path.Combine(appDataPath, "VectorGraphicEditor");
+            Directory.CreateDirectory(appFolder);
+            _autoSaveFilePath = Path.Combine(appFolder, "auto_save.json");
+
+            _fileService = new FileIOService(_autoSaveFilePath);
+
+            this.Width = 900;
             this.Height = 600;
             bm = new Bitmap(pic.Width, pic.Height);
             g = Graphics.FromImage(bm);
@@ -20,6 +30,29 @@ namespace VectorGraphicEditor__Paint_
 
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+
+            LoadAutoSave();
+        }
+
+        private void LoadAutoSave()
+        {
+            var loadedShapes = _fileService.LoadData();
+            if (loadedShapes != null && loadedShapes.Count > 0)
+            {
+                shapes = loadedShapes;
+                RedrawCanvas();
+            }
+        }
+
+        private void SaveAutoSave()
+        {
+            _fileService.SaveData(shapes);
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            SaveAutoSave(); 
         }
 
         Bitmap bm;

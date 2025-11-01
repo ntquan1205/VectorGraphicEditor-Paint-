@@ -53,6 +53,7 @@
     <Compile Include="Line.cs" />
     <Compile Include="PencilDrawing.cs" />
     <Compile Include="RectangleShape.cs" />
+    <Compile Include="Services\FileIOService.cs" />
     <Compile Include="Shape.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
