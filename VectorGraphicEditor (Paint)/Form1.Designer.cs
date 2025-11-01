@@ -41,6 +41,8 @@
             this.pic_color = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pic = new System.Windows.Forms.PictureBox();
+            this.btn_bringToFront = new System.Windows.Forms.Button();
+            this.btn_bringToBack = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
             this.SuspendLayout();
@@ -48,6 +50,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel1.Controls.Add(this.btn_bringToBack);
+            this.panel1.Controls.Add(this.btn_bringToFront);
             this.panel1.Controls.Add(this.btn_delete);
             this.panel1.Controls.Add(this.btn_select);
             this.panel1.Controls.Add(this.btn_save);
@@ -61,7 +65,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(847, 100);
+            this.panel1.Size = new System.Drawing.Size(1002, 100);
             this.panel1.TabIndex = 0;
             // 
             // btn_delete
@@ -227,7 +231,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 423);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(847, 38);
+            this.panel2.Size = new System.Drawing.Size(1002, 38);
             this.panel2.TabIndex = 1;
             // 
             // pic
@@ -236,7 +240,7 @@
             this.pic.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pic.Location = new System.Drawing.Point(0, 0);
             this.pic.Name = "pic";
-            this.pic.Size = new System.Drawing.Size(847, 461);
+            this.pic.Size = new System.Drawing.Size(1002, 461);
             this.pic.TabIndex = 2;
             this.pic.TabStop = false;
             this.pic.Paint += new System.Windows.Forms.PaintEventHandler(this.pic_Paint);
@@ -244,11 +248,41 @@
             this.pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_MouseMove);
             this.pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_MouseUp);
             // 
+            // btn_bringToFront
+            // 
+            this.btn_bringToFront.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
+            this.btn_bringToFront.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btn_bringToFront.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_bringToFront.ForeColor = System.Drawing.Color.White;
+            this.btn_bringToFront.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_bringToFront.Location = new System.Drawing.Point(760, 20);
+            this.btn_bringToFront.Name = "btn_bringToFront";
+            this.btn_bringToFront.Size = new System.Drawing.Size(91, 29);
+            this.btn_bringToFront.TabIndex = 7;
+            this.btn_bringToFront.Text = "Front";
+            this.btn_bringToFront.UseVisualStyleBackColor = true;
+            this.btn_bringToFront.Click += new System.EventHandler(this.btn_bringToFront_Click);
+            // 
+            // btn_bringToBack
+            // 
+            this.btn_bringToBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
+            this.btn_bringToBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btn_bringToBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_bringToBack.ForeColor = System.Drawing.Color.White;
+            this.btn_bringToBack.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_bringToBack.Location = new System.Drawing.Point(760, 59);
+            this.btn_bringToBack.Name = "btn_bringToBack";
+            this.btn_bringToBack.Size = new System.Drawing.Size(91, 29);
+            this.btn_bringToBack.TabIndex = 7;
+            this.btn_bringToBack.Text = "Back";
+            this.btn_bringToBack.UseVisualStyleBackColor = true;
+            this.btn_bringToBack.Click += new System.EventHandler(this.btn_bringToBack_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(847, 461);
+            this.ClientSize = new System.Drawing.Size(1002, 461);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pic);
@@ -256,6 +290,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pic)).EndInit();
             this.ResumeLayout(false);
@@ -277,6 +312,8 @@
         private System.Windows.Forms.Button btn_select;
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.PictureBox pic;
+        private System.Windows.Forms.Button btn_bringToFront;
+        private System.Windows.Forms.Button btn_bringToBack;
     }
 }
 

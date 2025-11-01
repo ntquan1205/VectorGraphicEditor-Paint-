@@ -11,7 +11,7 @@ namespace VectorGraphicEditor__Paint_
         {
             InitializeComponent();
 
-            this.Width = 800;
+            this.Width = 1000;
             this.Height = 600;
             bm = new Bitmap(pic.Width, pic.Height);
             g = Graphics.FromImage(bm);
@@ -43,6 +43,7 @@ namespace VectorGraphicEditor__Paint_
         private void pic_MouseDown(object sender, MouseEventArgs e)
         {
             paint = true;
+            px = e.Location;
             py = e.Location;
             cX = e.X;
             cY = e.Y;
@@ -206,6 +207,40 @@ namespace VectorGraphicEditor__Paint_
             index = 3;
             selectedShape = null;
             isMoving = false;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_bringToFront_Click(object sender, EventArgs e)
+        {
+            if (selectedShape != null)
+            {
+                int index = shapes.IndexOf(selectedShape);
+                if (index < shapes.Count - 1)
+                {
+                    shapes.RemoveAt(index);
+                    shapes.Add(selectedShape);
+                    RedrawCanvas();
+                }
+            }
+
+        }
+
+        private void btn_bringToBack_Click(object sender, EventArgs e)
+        {
+            if (selectedShape != null)
+            {
+                int index = shapes.IndexOf(selectedShape);
+                if (index > 0)
+                {
+                    shapes.RemoveAt(index);
+                    shapes.Insert(0, selectedShape);
+                    RedrawCanvas();
+                }
+            }
         }
 
         private void btn_rect_Click(object sender, EventArgs e)

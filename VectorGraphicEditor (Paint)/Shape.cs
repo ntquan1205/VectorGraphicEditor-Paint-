@@ -17,14 +17,25 @@ namespace VectorGraphicEditor__Paint_
         {
             if (IsSelected)
             {
-                using (Pen selectionPen = new Pen(Color.Blue, 1))
+                var path = GetPath();
+
+                using (Pen outerSelectionPen = new Pen(Color.Blue, 3))
                 {
-                    selectionPen.DashStyle = DashStyle.Dash;
-                    selectionPen.DashPattern = new float[] { 3, 3 };
-                    var path = GetPath();
-                    g.DrawPath(selectionPen, path);
+                    outerSelectionPen.DashStyle = DashStyle.Dash;
+                    outerSelectionPen.DashPattern = new float[] { 5, 5 };
+                    g.DrawPath(outerSelectionPen, path);
                 }
+
+                using (Pen innerSelectionPen = new Pen(Color.White, 1))
+                {
+                    innerSelectionPen.DashStyle = DashStyle.Dash;
+                    innerSelectionPen.DashPattern = new float[] { 5, 5 };
+                    g.DrawPath(innerSelectionPen, path);
+                }
+
             }
         }
+
+    
     }
 }
