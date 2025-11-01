@@ -5,7 +5,7 @@ namespace VectorGraphicEditor__Paint_
 {
     public class RectangleShape : Shape
     {
-        public Rectangle Bounds { get; set; }
+        private Rectangle Bounds { get; set; }
 
         public RectangleShape(Rectangle bounds, Color color, float width)
         {

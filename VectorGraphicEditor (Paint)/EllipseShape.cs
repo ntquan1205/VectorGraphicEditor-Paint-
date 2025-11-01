@@ -5,7 +5,7 @@ namespace VectorGraphicEditor__Paint_
 {
     public class EllipseShape : Shape
     {
-        public Rectangle Bounds { get; set; }
+        private Rectangle Bounds { get; set; }
 
         public EllipseShape(Rectangle bounds, Color color, float width)
         {

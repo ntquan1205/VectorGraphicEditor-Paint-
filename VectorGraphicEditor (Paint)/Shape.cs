@@ -5,9 +5,27 @@ namespace VectorGraphicEditor__Paint_
 {
     public abstract class Shape
     {
-        public Color Color { get; set; }
-        public float PenWidth { get; set; }
-        public bool IsSelected { get; set; }
+        private Color _color;
+        private float _penWidth;
+        private bool _isSelected;
+
+        public Color Color
+        {
+            get { return _color; }
+            set { _color = value; }
+        }
+
+        public float PenWidth
+        {
+            get { return _penWidth; }
+            set { _penWidth = value; }
+        }
+
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set { _isSelected = value; }
+        }
         public abstract void Draw(Graphics g);
         public abstract bool Contains(Point point);
         public abstract void Move(int deltaX, int deltaY);

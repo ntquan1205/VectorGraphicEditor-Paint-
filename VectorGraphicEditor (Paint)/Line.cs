@@ -6,8 +6,8 @@ namespace VectorGraphicEditor__Paint_
 {
     public class Line : Shape
     {
-        public Point StartPoint { get; set; }
-        public Point EndPoint { get; set; }
+        private Point StartPoint { get; set; }
+        private Point EndPoint { get; set; }
 
         public Line(Point start, Point end, Color color, float width)
         {

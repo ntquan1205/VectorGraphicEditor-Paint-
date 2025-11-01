@@ -6,7 +6,7 @@ namespace VectorGraphicEditor__Paint_
 {
     public class PencilDrawing : Shape
     {
-        public List<Point> Points { get; set; }
+        private List<Point> Points { get; set; }
 
         public PencilDrawing(Color color, float width)
         {
